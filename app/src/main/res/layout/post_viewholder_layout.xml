@@ -2,38 +2,39 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                              xmlns:tools="http://schemas.android.com/tools"
                                              xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             android:id="@+id/post__container"
+                                             android:background="@android:color/holo_blue_bright"
                                              android:layout_width="match_parent"
-                                             android:layout_height="match_parent">
+                                             android:layout_height="wrap_content">
 
     <TextView android:id="@+id/post__tv__name"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:padding="6dp"
+              android:text="@string/title_films"
               app:layout_constraintStart_toStartOf="parent"
               app:layout_constraintTop_toTopOf="parent"
               android:textSize="20sp"
-              tools:text="Rocio Jurado"
     />
 
-    <TextView android:id="@+id/god__tv__description"
+    <TextView android:id="@+id/post__tv__date"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               app:layout_constraintStart_toStartOf="@id/post__tv__name"
               app:layout_constraintTop_toBottomOf="@id/post__tv__name"
               android:textSize="14sp"
-              android:text="Descripcion: "
+              android:text="@string/date"
               android:textStyle="bold"
               android:padding="6dp"
-              tools:text="niños, no useis strings hardcodeados aqui"
     />
 
-    <TextView android:id="@+id/god__tv__type"
+    <TextView android:id="@+id/post__tv__date_content"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:textSize="14sp"
               android:padding="6dp"
-              app:layout_constraintStart_toEndOf="@id/god__tv__description"
+              app:layout_constraintStart_toEndOf="@id/post__tv__date"
               app:layout_constraintTop_toBottomOf="@id/post__tv__name"
-              tools:text="coooomooo una olaaaaa"/>
+              tools:text="23/8/2018"/>
 
 </android.support.constraint.ConstraintLayout>

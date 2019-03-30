@@ -5,15 +5,21 @@ import android.arch.lifecycle.ViewModelProviders
 import android.graphics.Rect
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import com.josecm.cleanarchitectureapp.R
 import com.josecm.cleanarchitectureapp.datalayer.base.Failure
 import com.josecm.cleanarchitectureapp.presentationlayer.base.ScreenState
+import com.josecm.cleanarchitectureapp.presentationlayer.components.recyclercomponent.mainAdapter.HomeActionView
+import com.josecm.cleanarchitectureapp.presentationlayer.components.recyclercomponent.mainAdapter.HomeAdapter
+import com.josecm.cleanarchitectureapp.presentationlayer.components.recyclercomponent.mainAdapter.HomeItem
 import com.josecm.cleanarchitectureapp.presentationlayer.domain.CommentVO
 import com.josecm.cleanarchitectureapp.presentationlayer.domain.PostVO
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.toast
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initModel()
-        //initView()
+        initView()
     }
 
     private fun initModel() {
@@ -42,30 +48,32 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
- /*   private fun initView() {
+    private fun initView() {
         rv?.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = createAdapter()
             addItemDecoration(createItemDecoration())
         }
-    }*/
+    }
 
-   /* private fun createAdapter():HomeAdapter {
-
-    }*/
+    private fun createAdapter(): HomeAdapter {
+        val list = emptyList<HomeItem>().toMutableList()
+        return HomeAdapter(itemList = list, callback = { action ->
+            when (action) {
+                is HomeActionView.Post -> toast("pulse in: ${action.post.title}")
+                is HomeActionView.Comment -> toast("pulse in: ${action.comment.body}")
+                HomeActionView.None -> toast("pulse in item")
+                else -> toast("pulse in item unknow")
+            }
+        })
+    }
 
 
     private fun createItemDecoration(): RecyclerView.ItemDecoration {
         return object : RecyclerView.ItemDecoration() {
             override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
                 super.getItemOffsets(outRect, view, parent, state)
-
-                val itemPosition = parent.getChildAdapterPosition(view)
-
-                if (itemPosition > 0) {
-                    outRect.bottom = 30
-
-                }
+                outRect.bottom = 30
             }
         }
     }
@@ -85,11 +93,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun renderPost(posts: List<PostVO>?) {
-        Log.d("MainActivity", "POST")
+        posts?.let {
+            (rv?.adapter as? HomeAdapter)?.refreshData(posts)
+        }
+
     }
 
     private fun renderComment(comments: List<CommentVO>?) {
-        Log.d("MainActivity", "COMMENTS")
+        comments?.let {
+            (rv?.adapter as? HomeAdapter)?.refreshData(comments)
+        }
     }
 
     private fun showUnknowError() {
