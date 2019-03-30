@@ -25,6 +25,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "com.android.support:appcompat-v7:$support_version"
+    implementation "com.android.support:recyclerview-v7:$support_version"
     implementation "com.android.support.constraint:constraint-layout:$constraintlayout_version"
     //Kotlin - Anko commons
     implementation "org.jetbrains.anko:anko-commons:$anko_version"
@@ -42,6 +43,12 @@ dependencies {
     //Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttpLoggingInterceptorVersion"
+    //LeakCanary
+    implementation "com.squareup.leakcanary:leakcanary-android:$leakCanary_version"
+    /*releaseApi "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanary_version"
+    // Optional, if you use support library fragments:
+    debugApi "com.squareup.leakcanary:leakcanary-support-fragment:$leakCanary_version"*/
 
     //Test
     testImplementation 'junit:junit:4.12'

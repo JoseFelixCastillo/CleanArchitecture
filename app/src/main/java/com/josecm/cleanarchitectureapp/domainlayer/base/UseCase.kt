@@ -1,5 +1,6 @@
 package com.josecm.cleanarchitectureapp.domainlayer.base
 
+import com.josecm.cleanarchitectureapp.datalayer.base.Failure
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
